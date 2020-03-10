@@ -1,0 +1,42 @@
+|	ID	English	Spanish
+|	Play button	PLAY	JUGAR
+|	Back to menu confirmation	"You are going back to the main menu.
+
+Are you sure?"	"Vas a volver al menu inicial.
+
+Estás de acuerdo?"
+|	Pause button tutorial	"Hey! Did you check the menu down below?
+
+You can sort the center pieces from the border pieces."	"Hey! Has visto el menu de abajo?
+
+Puedes separar las piezas del borde de las centrales."
+|	Cancel button	Cancel	Cancelar
+|	Sort pieces by border	SORT	BORDES
+|	Puzzle completed	"PUZZLE
+COMPLETE!"	"PUZLE
+COMPLETADO!"
+|	Internet required	Please, connect to the internet to continue.	Por favor, conéctate a internet para continuar.
+|	Agree to download	Download	Descargar
+|	Easy button	"EASY
+16pcs"	"FACIL
+16pzs"
+|	Mid button	"MED
+24pcs"	"MEDIO
+24pzs"
+|	Advanced button	"ADV
+60pcs"	"DIFICIL
+60pzs"
+|	Hard button	"HARD
+112pcs"	"PRO
+112pzs"
+|	Epic button	"EPIC
+160pcs"	"EPICO
+160pzs"
+|	Guide button	GUIDE	GUIA
+|	Preview header	PREVIEW	VISTA PREVIA
+|	Regroup button	REGROUP	REAGRUPAR
+|	Start puzzle button	START	INICIAR
+|	Yes agree	YES	SI
+|	Back to menu button	MENU	MENU
+|	Timer after completed	Time:	Tiempo:
+|	Difficulty after completed	Difficulty:	Dificultad:
