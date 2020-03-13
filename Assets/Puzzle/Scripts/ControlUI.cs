@@ -310,9 +310,10 @@ public class ControlUI : MonoBehaviour {
 		Texture2D imagenTex2D = imagenTex as Texture2D;
 		if(PlayerPrefs.GetInt("puzzleCompleto"+numeroBoton, 0) < 5){
             Debug.Log("NUM " + numeroBoton + " " + imagenTex2D.name);
-			imagenTex2D = ConvertToGrayscale(imagenTex2D);
-		}
-		grayscalePuzzleImages.Add (imagenTex2D);
+			//imagenTex2D = ConvertToGrayscale(imagenTex2D);
+            
+        }
+		//grayscalePuzzleImages.Add (imagenTex2D);
 		Rect rect = new Rect (0, 0, imagenTex2D.width, imagenTex2D.height);
 		return Sprite.Create (imagenTex2D, rect, Vector2.zero, imagenTex2D.width);
 	}
@@ -451,8 +452,9 @@ public class ControlUI : MonoBehaviour {
 				Texture2D texturaGrises = Instantiate (imageDownloadScript.puzzleImageList [numImagen]) as Texture2D;
 
 				Sprite imagenAColor = ConversionRapidaASprite (texturaColor);
-				Sprite imagenEnGris = ConversionRapidaASprite (ConvertToGrayscale (texturaGrises));
-				imagenesAColor [numImagen] = imagenAColor;
+				//Sprite imagenEnGris = ConversionRapidaASprite (ConvertToGrayscale (texturaGrises));
+                Sprite imagenEnGris = ConversionRapidaASprite(texturaGrises);
+                imagenesAColor [numImagen] = imagenAColor;
 				imagenesEnGris [numImagen] = imagenEnGris;
 			}
 		}
@@ -494,25 +496,26 @@ public class ControlUI : MonoBehaviour {
         switch (dificultadSeleccionada)
         {
             case 0:
-                puzzlePosition = new Vector3(0.2f, -0.5f, 0);
+                puzzlePosition = new Vector3(0.1f, 0.2f, 0);
                 break;
             case 1:
-                puzzlePosition = new Vector3(0.2f, -0.5f, 0);
+                puzzlePosition = new Vector3(0.1f, 0.19f, 0);
                 break;
             case 2:
-                puzzlePosition = Vector3.zero;
+                puzzlePosition = new Vector3(-0.19f, 0.63f, 0);
                 break;
             case 3:
-                puzzlePosition = Vector3.zero;
+                puzzlePosition = new Vector3(-0.17f, 0.59f, 0);
                 break;
             case 4:
-                puzzlePosition = Vector3.zero;
+                puzzlePosition = new Vector3(-0.19f, 0.62f, 0);
                 break;
         }
 
 		GameObject newPuzzle = Instantiate (prefabsPuzzle [dificultadSeleccionada], puzzlePosition, prefabsPuzzle [dificultadSeleccionada].transform.rotation) as GameObject;
         newPuzzle.name = prefabsPuzzle [dificultadSeleccionada].name; //Remove "(Clone)" in his name
 		this.newPuzzle = newPuzzle;
+        
 		panelMain.SetActive (false);
 		panelSelection.SetActive (false);
 		panelPreGame.SetActive (true);
@@ -520,7 +523,8 @@ public class ControlUI : MonoBehaviour {
 		panelComplete.SetActive (false);
 		LoadTexture ();
 		EnableBackgroundHelp ();
-	}
+        //newPuzzle.SetActive(false);
+    }
 
 	void LoadTexture(){
 		GameObject[] puzzlePieces = GameObject.FindGameObjectsWithTag ("PiezaPuzzle");
@@ -530,7 +534,8 @@ public class ControlUI : MonoBehaviour {
 	}
 
 	public void StartPuzzle(){
-		MovePieces movePieces = this.gameObject.GetComponent<MovePieces> ();
+        //newPuzzle.SetActive(true);
+        MovePieces movePieces = this.gameObject.GetComponent<MovePieces> ();
 		movePieces.attachPieces = GameObject.FindGameObjectWithTag("MatrizPuzzle").GetComponent <AttachPieces> ();
 		DisableBGHelp ();
 		ShufflePieces (newPuzzle.transform); //Barajar Piezas
@@ -571,8 +576,9 @@ public class ControlUI : MonoBehaviour {
 
 	IEnumerator LerpChild(Transform piece, float depth, float speed){
 		Vector3 startingPos = piece.position;
-		Vector3 finalPos = new Vector3 (Random.Range (-2.6f, 2.6f), Random.Range (5.2f, 5.5f), depth);
-		float t = 0;
+		//Vector3 finalPos = new Vector3 (Random.Range (-2.6f, 2.6f), Random.Range (5.2f, 5.5f), depth);
+        Vector3 finalPos = new Vector3(Random.Range(7f, 7.5f), Random.Range(-1f, 3.6f), depth);
+        float t = 0;
 		while(t < 0.5f){
 			t += speed * Time.deltaTime;
             piece.position = Vector3.Lerp (startingPos, finalPos, t*2);
@@ -657,9 +663,9 @@ public class ControlUI : MonoBehaviour {
 		int altoPuzzle = int.Parse(dosDimensiones [1])-1;
 
 		if (pieza.name.Contains ("_0x") || pieza.name.Contains ("x0") || pieza.name.Contains ("x" + anchoPuzzle) || pieza.name.Contains ("_"+altoPuzzle + "x")) {
-			posFinal = new Vector3 (Random.Range (-2.6f, -1), Random.Range (5.2f, 5.5f), depth);
+			posFinal = new Vector3 (Random.Range (7f, 7.5f), Random.Range (-1f, 3.6f), depth);
 		} else {
-			posFinal = new Vector3 (Random.Range (1, 2.6f), Random.Range (5.2f, 5.5f), depth);
+			posFinal = new Vector3 (Random.Range (7f, 7.5f), Random.Range (-1f, 3.6f), depth);
 		}
 
 
@@ -692,7 +698,7 @@ public class ControlUI : MonoBehaviour {
 
 	void DisableBGHelp(){
 		helpEnabled = false;
-		backgroundHelp.sprite = null;
+		//backgroundHelp.sprite = null;
 
 		UpdatePauseButtons ();
 	}
@@ -700,7 +706,7 @@ public class ControlUI : MonoBehaviour {
 	public void EnableBGHelp(){
 		if (helpEnabled) {
 			helpEnabled = false;
-			backgroundHelp.sprite = null;
+			//backgroundHelp.sprite = null;
 			UpdatePauseButtons ();
 			return;
 		}
@@ -733,9 +739,9 @@ public class ControlUI : MonoBehaviour {
 		}
 		helpEnabled = !helpEnabled;
 		if (helpEnabled) {
-			backgroundHelp.sprite = spritePreseleccionado;
+			//backgroundHelp.sprite = spritePreseleccionado;
 		} else {
-			backgroundHelp.sprite = null;
+			//backgroundHelp.sprite = null;
 		}
 		UpdatePauseButtons ();
 	}
